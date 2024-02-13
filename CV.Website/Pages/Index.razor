@@ -1,0 +1,215 @@
+﻿@page "/"
+@using CV.ClassLibrary.Models
+
+<PageTitle>Index</PageTitle>
+@* Header *@
+
+<div class="d-flex justify-content-center bg-color">
+	<h1 class="display-1 text-color">CV Alexander Brasjö</h1>
+</div>
+
+
+<div class="container">
+	<div class="row mb-4">
+		@* image of me  *@
+		<div class="section">
+			<img src="/Images/Alexander1.jpg" alt="picture of me" class="circle-image" />
+		</div>
+		@* about me  *@
+		<div class="d-flex flex-column justify-content-center section">
+			<h4 class="display-4 text-color m-2">About me</h4>
+			<p class="lead text-color m-3">
+				I am a committed student studying to become a .NET cloud
+				developer.
+				Previously, I have worked in warehouse and logistics, which has given me
+				valuable experience in managing complex systems and workflows.
+				In my spare time I am an avid golf and padel player, which not only shows my
+				love of sports, but also my appreciation of outdoor activities and
+				competitiveness. I am also a family-oriented person who loves to
+				spend time with my family, including my two children. This balance between
+				work, studies, sports and family show my ability to combine
+				professional ambitions with personal well-being and family life.
+			</p>
+		</div>
+		@* Contact Information *@
+		<div class="section">
+			<div class="d-flex flex-column justify-content-center">
+				<h4 class="display-4 text-color">Contact/Information</h4>
+				<table class="table table-borderless text-color centered-content vertical-center" style="font-size:x-large">
+					<tr>
+						<td>
+							<span class="oi oi-location" title="location" aria-hidden="true"></span>
+						</td>
+						<td style="text-align: left">Kvarnvägen 10, 44296 Kode</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="oi oi-phone" title="phone" aria-hidden="true"></span>
+						</td>
+						<td style="text-align: left">0734-292076</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="oi oi-envelope-closed" title="email" aria-hidden="true"></span>
+						</td>
+						<td style="text-align: left">alexander.brasjo@gmail.se</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="" title="github" aria-hidden="true">
+								<a href="https://github.com/alexanderbrasjo">
+									<img src="/Images/githublogo3.png" alt="github logo" style="width: 25px; height:auto;"/>
+								</a>
+							</span>
+						</td>
+						<td style="text-align: left">Github</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="" title="linked-in" aria-hidden="true">
+								<a href="https://www.linkedin.com/in/alexander-brasj%C3%B6-318b99289/">
+									<img src="/Images/linkedinlogo.png" alt="linked-in logo" style="width: 25px; height:auto;" />
+								</a>
+							</span>
+						</td>
+						<td style="text-align: left">Linked-in</td>
+					</tr>
+				</table>
+				@* <ul class="text-color list-unstyled">
+					<li class="m-2">
+						<span class="oi oi-location justify-content-start" title="person" aria-hidden="true"></span> Kvarnvägen 10, 44296 Kode
+					</li>
+					<li class="m-2">
+						<span class="oi oi-phone justify-content-center" title="person" aria-hidden="true"></span> 0734-292076
+					</li>
+					<li class="m-2">
+						<span class="oi oi-envelope-closed" title="person" aria-hidden="true"></span> alexander.brasjo@gmail.se
+					</li>
+					<li>
+
+					</li>
+				</ul> *@
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="section">
+			<h4 class="display-4 text-color">Education</h4>
+			<ul class="text-color">
+				<li>
+					<p class="lead"> IT-Högskolan – Göteborg<br />.NET Cloud Developer August 2023 - Juni 2025</p>
+					<ul class="mb-2">
+						<li>Cloud platform management</li>
+						<li>Database and Storage solutions</li>
+						<li>Cloud-based Integration and API development</li>
+						<li>DevOps and Automation</li>
+						<li>Security</li>
+						<li>Scalability and Performance</li>
+						<li>Optimization</li>
+						<li>Troubleshooting and Support</li>
+					</ul>
+				</li>
+				<li>
+					<p class="lead">NTI Gymnasiet – Göteborg<br />Electrics/Data, Augusti 2008 – juni 2010</p>
+				</li>
+			</ul>
+		</div>
+
+		<div class="section">
+			<h4 class="display-4 text-color">Projects</h4>
+			<table class="table table-borderless text-color" style="font-size:medium">
+				<thead>
+					<tr>
+						<td>Name</td>
+						<td>Description</td>
+						<td>Github link</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Webshop</td>
+						<td>A simple webshop in a console application</td>
+						<td><a href="https://github.com/alexanderbrasjo/Labb2">Webshop</a></td>
+					</tr>
+					<tr>
+						<td>QuizGame</td>
+						<td>A quizgame made in an WPF application</td>
+						<td><a href="https://github.com/alexanderbrasjo/Labb3">Quizgame</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="section">
+				<h4 class="display-4 text-color">Skills</h4>
+				<table class="table table-borderless text-color" style="font-size:medium">
+					<thead>
+						<tr>
+							<td>Name</td>
+							<td>Description</td>
+							<td>Years of experience</td>
+							<td>Skill level</td>
+						</tr>
+					</thead>
+					<tbody>
+					@foreach(var skill in listOfSkills)
+					{
+						<tr>
+							<td>@skill.Name</td>
+							<td>@skill.Description</td>
+							<td>@skill.YearsOfExp</td>
+							<td>
+								<div class="progress-container">
+									<div class="progress-bar" style="width: @((skill.Level / 10.0) * 100)%;">
+										@skill.Level
+									</div>
+								</div>
+							</td>
+						</tr>
+					}
+					</tbody>
+				</table>
+		</div>
+	</div>
+
+</div>
+
+@code {
+	private List<Skills> listOfSkills = new List<Skills>();
+	private HttpClient httpClient = new HttpClient();
+
+	protected override Task OnInitializedAsync()
+	{
+		FillSkillsList();
+
+		return base.OnInitializedAsync();
+	}
+
+	private async Task FillSkillsList()
+	{
+		try
+		{
+			var response = await httpClient.GetAsync("https://localhost:7166/skills");
+
+			if (response.IsSuccessStatusCode)
+			{
+				listOfSkills = await response.Content.ReadFromJsonAsync<List<Skills>>();
+				StateHasChanged();
+			}
+			else
+			{
+
+				listOfSkills = new List<Skills>();
+			}
+		}
+		catch (Exception ex)
+		{
+
+			listOfSkills = new List<Skills>();
+			Console.WriteLine(ex.Message);
+		}
+	}
+}
+
+
