@@ -16,7 +16,9 @@ namespace CV.ClassLibrary.Data
 
         public MongoDBService(string database)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
+	        
+			var connectionString = Environment.GetEnvironmentVariable("MONGO_CONNECTION_STRING");
+            var client = new MongoClient(connectionString);
             db = client.GetDatabase(database);
         }
 

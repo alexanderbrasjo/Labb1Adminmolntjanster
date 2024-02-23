@@ -13,34 +13,37 @@ html, body {
 .btn-color {
     color: #FC6736;
 }
+.container {
+    position: relative;
+}
 h1:focus {
     outline: none;
 }
 .row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between; /* This helps distribute space but consider changing if it doesn't fit your design */
+    justify-content: space-between; 
     gap: 10px;  
 }
 .circle-image {
     border-radius: 50%;
-    width: 25Rem; 
-    height: 25Rem; 
+    width: 23Rem; 
+    height: 23Rem; 
     object-fit: cover; 
 }
 .progress-container {
-    width: 100%; /* Full width of the cell */
-    background-color: #e0e0e0; /* Light grey background */
-    border-radius: 5px; /* Optional: rounds the corners */
+    width: 100%; 
+    background-color: #e0e0e0; 
+    border-radius: 5px; 
 }
 
 .progress-bar {
-    height: 20px; /* Height of the progress bar */
-    background-color: #FC6736; /* Green color for the filled part */
-    border-radius: 5px; /* Optional: rounds the corners */
-    text-align: center; /* Optional: if you want to add text inside the bar */
-    color: white; /* Optional: text color */
-    line-height: 20px; /* Optional: aligns text vertically */
+    height: 20px; 
+    background-color: #FC6736; 
+    border-radius: 5px; 
+    text-align: center; 
+    color: white; 
+    line-height: 20px; 
 }
 
 a, .btn-link {
@@ -48,21 +51,77 @@ a, .btn-link {
 }
 
 .section {
-    display: flex; /* Enable Flexbox */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    flex-direction: column; /* Stack children vertically */
-    flex: 1 1 calc(33.333% - 10px); /* Subtract the total margin from the width */
-    text-align: center;
-    transition: transform 0.2s ease-in-out;
+    display: flex; 
+    background-color: #0C2D57;
+    align-items: center; 
+    flex-direction: column; 
+    flex: 1 1 calc(33.333% - 10px); 
     box-sizing: border-box;
+    transition: transform 0.5s ease-in-out, box-shadow 0.2s ease-in-out, z-index 0s;
+    transform: scale(1);
+    box-shadow: 0 0 0 transparent;
+    position: relative;
     transform-origin: center center;
+    z-index: 1;
+    align-self: flex-start;
 }
 
     .section:hover {
-        transform: scale(1.5); /* Slightly reduced scale to fit */
-        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-        z-index: 1; /* Ensure the hovered section is above others */
+        transform: scale(1.2); 
+        box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+        border-radius: 10px;
+        z-index: 100; 
+    }
+.skills-section.authorized {
+    display: flex;
+    background-color: #0C2D57;
+    align-items: center;
+    flex-direction: column;
+    flex: 1 1 calc(33.333% - 10px);
+    box-sizing: border-box;
+    transition: transform 0.5s ease-in-out, box-shadow 0.2s ease-in-out, z-index 0s;
+    transform: scale(1);
+    box-shadow: 0 0 0 transparent;
+    position: relative;
+    transform-origin: center center;
+    z-index: 1;
+    align-self: flex-start;
+
+}
+    .skills-section.authorized:hover {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60vw;
+        height: auto;
+        transform: translate(-50%, -50%) scale(1.0);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+        border-radius: 10px;
+        z-index: 100;
+        align-items: center;
+        justify-content: center;
+    }
+
+.skills-section.not-authorized {
+    display: flex;
+    background-color: #0C2D57;
+    align-items: center;
+    flex-direction: column;
+    flex: 1 1 calc(33.333% - 10px);
+    box-sizing: border-box;
+    transition: transform 0.5s ease-in-out, box-shadow 0.2s ease-in-out, z-index 0s;
+    transform: scale(1);
+    box-shadow: 0 0 0 transparent;
+    position: relative;
+    transform-origin: center center;
+    z-index: 1;
+    align-self: flex-start;
+}
+    .skills-section.not-authorized:hover {
+        transform: scale(1.2);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+        border-radius: 10px;
+        z-index: 100;
     }
 
 
@@ -71,6 +130,7 @@ a, .btn-link {
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
+
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
@@ -125,17 +185,96 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
-@media (max-width: 768px) {
-    .section {
-        flex: 0 0 100%; /* Adjust for smaller screens */
-        margin-bottom: 10px;
-    }
+.edit-form {
+    background-color: #0C2D57;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: 4px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
 }
 
-@media (max-width: 480px) {
-    .section {
-        /*flex: 0 0 100%;  Stack vertically on very small screens 
-        font-size: smaller;*/
-        padding: 10px;
+    .edit-form label {
+        display: block;
+        margin-bottom: .5rem;
+        font-weight: bold;
+    }
+
+    .edit-form input, .edit-form select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .edit-form button {
+        background-color: #FC6736;
+        color: #EFECEC;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .edit-form button:hover {
+            background-color: #00317a;
+        }
+/* Large screens */
+@media (min-width: 992px) and (max-width: 1200px) {
+    .section:hover, .skills-section.authorized:hover, .skills-section.not-authorized:hover {
+        position: static;
+        top: auto;
+        left: auto;
+        width: auto; 
+        height: auto;
+        transform: scale(1.10);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+        border-radius: 10px;
+        z-index: 100;
     }
 }
+/* Medium screens */
+@media (min-width: 576px) and (max-width: 992px) {
+    .section, .skills-section {
+        flex: 0 0 100% !important;
+        margin-bottom: 10px !important;
+    }
+
+        .section:hover, .skills-section.authorized:hover, .skills-section.not-authorized:hover {
+            position: static;
+            top: auto;
+            left: auto;
+            width: auto; 
+            height: auto;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            border-radius: 10px;
+            z-index: 100;
+            flex-direction: column;
+        }
+    
+}
+/* Small Screens */
+@media (max-width: 576px) {
+    .section, .skills-section {
+        flex: 0 0 100% !important;
+        margin-bottom: 10px !important;
+    }
+
+        .section:hover, .skills-section.authorized:hover, .skills-section.not-authorized:hover {
+            position: static;
+            top: auto;
+            left: auto;
+            width: auto;
+            height: auto;
+            transform: none;
+            box-shadow: none;
+            border-radius: 0;
+            z-index: 1;
+            flex-direction: column;
+        }
+}   
+
+
+

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CV.Website", "CV.Website\CV.Website.csproj", "{7D66EDBF-651F-4EAF-8B55-56FE2BD6F142}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CV.Website", "CV.Website\CV.Website.csproj", "{7D66EDBF-651F-4EAF-8B55-56FE2BD6F142}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CV.API", "CV.API\CV.API.csproj", "{5787C4DC-1C70-4DE2-AF8F-61A0A1DD66FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CV.API", "CV.API\CV.API.csproj", "{5787C4DC-1C70-4DE2-AF8F-61A0A1DD66FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CV.ClassLibrary", "CV.ClassLibrary\CV.ClassLibrary.csproj", "{6EACC0A8-CDA4-4B63-A53A-70DB4263BCBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CV.ClassLibrary", "CV.ClassLibrary\CV.ClassLibrary.csproj", "{6EACC0A8-CDA4-4B63-A53A-70DB4263BCBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

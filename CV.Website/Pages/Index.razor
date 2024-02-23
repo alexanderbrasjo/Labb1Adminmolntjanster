@@ -1,24 +1,32 @@
 ﻿@page "/"
 @using CV.ClassLibrary.Models
+@using System.Net.Http.Json
 
-<PageTitle>Index</PageTitle>
+<PageTitle>CV</PageTitle>
 @* Header *@
 
 <div class="d-flex justify-content-center bg-color">
-	<h1 class="display-1 text-color">CV Alexander Brasjö</h1>
+	<h1 class="display-1 text-color mb-5">CV Alexander Brasjö</h1>
 </div>
 
 
-<div class="container">
-	<div class="row mb-4">
+<div class="container mt-5" style="position:relative">
+	<div class="row">
 		@* image of me  *@
 		<div class="section">
-			<img src="/Images/Alexander1.jpg" alt="picture of me" class="circle-image" />
+			<img src="https://abwebb3images.blob.core.windows.net/images/Alexander1.jpg" alt="picture of me" class="circle-image mt-2" />
+			@*Joke of the day*@
+			<div class="mb-2 mt-2">
+				<h6 class="display-6 text-color d-flex justify-content-center">Joke of the day:</h6>
+				<p class="lead text-color">@jokeOfTheDay.Setup</p>
+				<p class="lead text-color">@jokeOfTheDay.Delivery</p>
+				<button @onclick="() => GetJokeOfTheDay()" class="btn btn-color mb-2">Refresh joke <span class="oi oi-reload"></span></button>
+			</div>
 		</div>
 		@* about me  *@
-		<div class="d-flex flex-column justify-content-center section">
-			<h4 class="display-4 text-color m-2">About me</h4>
-			<p class="lead text-color m-3">
+		<div class="section">
+			<h4 class="display-4 text-color">About me</h4>
+			<p class="lead text-color m-3 justify-content-start">
 				I am a committed student studying to become a .NET cloud
 				developer.
 				Previously, I have worked in warehouse and logistics, which has given me
@@ -35,7 +43,7 @@
 		<div class="section">
 			<div class="d-flex flex-column justify-content-center">
 				<h4 class="display-4 text-color">Contact/Information</h4>
-				<table class="table table-borderless text-color centered-content vertical-center" style="font-size:x-large">
+				<table class="table table-borderless text-color centered-content vertical-center mb-2" style="font-size:x-large">
 					<tr>
 						<td>
 							<span class="oi oi-location" title="location" aria-hidden="true"></span>
@@ -58,7 +66,7 @@
 						<td>
 							<span class="" title="github" aria-hidden="true">
 								<a href="https://github.com/alexanderbrasjo">
-									<img src="/Images/githublogo3.png" alt="github logo" style="width: 25px; height:auto;"/>
+									<img src="https://abwebb3images.blob.core.windows.net/images/githublogo3.png" alt="github logo" style="width: 25px; height:auto;" />
 								</a>
 							</span>
 						</td>
@@ -68,38 +76,37 @@
 						<td>
 							<span class="" title="linked-in" aria-hidden="true">
 								<a href="https://www.linkedin.com/in/alexander-brasj%C3%B6-318b99289/">
-									<img src="/Images/linkedinlogo.png" alt="linked-in logo" style="width: 25px; height:auto;" />
+									<img src="https://abwebb3images.blob.core.windows.net/images/linkedinlogo.png" alt="linked-in logo" style="width: 25px; height:auto;" />
 								</a>
 							</span>
 						</td>
 						<td style="text-align: left">Linked-in</td>
 					</tr>
+					<AuthorizeView>
+					<tr>
+						<td>
+							<span class="" title="OnlyFans" aria-hidden="true">
+									<a href="/of">
+										<img src="https://abwebb3images.blob.core.windows.net/images/OFlogo.png" alt="OnlyFans logo" style="width: 25px; height:auto;" />
+								</a>
+							</span>
+						</td>
+							<td style="text-align: left">OnlyFans</td>
+					</tr>
+					</AuthorizeView>
 				</table>
-				@* <ul class="text-color list-unstyled">
-					<li class="m-2">
-						<span class="oi oi-location justify-content-start" title="person" aria-hidden="true"></span> Kvarnvägen 10, 44296 Kode
-					</li>
-					<li class="m-2">
-						<span class="oi oi-phone justify-content-center" title="person" aria-hidden="true"></span> 0734-292076
-					</li>
-					<li class="m-2">
-						<span class="oi oi-envelope-closed" title="person" aria-hidden="true"></span> alexander.brasjo@gmail.se
-					</li>
-					<li>
-
-					</li>
-				</ul> *@
 			</div>
 		</div>
 	</div>
 
 	<div class="row">
+		@*Education*@
 		<div class="section">
 			<h4 class="display-4 text-color">Education</h4>
-			<ul class="text-color">
+			<ul class="text-color" style="font-size:large">
 				<li>
-					<p class="lead"> IT-Högskolan – Göteborg<br />.NET Cloud Developer August 2023 - Juni 2025</p>
-					<ul class="mb-2">
+					<p class="lead"> IT-Högskolan – Göteborg<br/>.NET Cloud Developer August 2023 - June 2025</p>
+					<ul class="mb-3">
 						<li>Cloud platform management</li>
 						<li>Database and Storage solutions</li>
 						<li>Cloud-based Integration and API development</li>
@@ -111,86 +118,158 @@
 					</ul>
 				</li>
 				<li>
-					<p class="lead">NTI Gymnasiet – Göteborg<br />Electrics/Data, Augusti 2008 – juni 2010</p>
+					<p class="lead">NTI Gymnasiet – Göteborg<br/>Electrics/Data, August 2008 – June 2010</p>
 				</li>
 			</ul>
 		</div>
-
+		
+		@*Projects*@
 		<div class="section">
 			<h4 class="display-4 text-color">Projects</h4>
-			<table class="table table-borderless text-color" style="font-size:medium">
+			<table class="table table-borderless text-color" style="font-size:large">
 				<thead>
-					<tr>
-						<td>Name</td>
-						<td>Description</td>
-						<td>Github link</td>
-					</tr>
+				<tr>
+					<td>Name</td>
+					<td>Description</td>
+					<td>Github link</td>
+				</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Webshop</td>
-						<td>A simple webshop in a console application</td>
-						<td><a href="https://github.com/alexanderbrasjo/Labb2">Webshop</a></td>
-					</tr>
-					<tr>
-						<td>QuizGame</td>
-						<td>A quizgame made in an WPF application</td>
-						<td><a href="https://github.com/alexanderbrasjo/Labb3">Quizgame</a></td>
-					</tr>
+				<tr>
+					<td>Webshop</td>
+					<td>A simple webshop in a console application</td>
+					<td><a href="https://github.com/alexanderbrasjo/Labb2">Webshop</a></td>
+				</tr>
+				<tr>
+					<td>QuizGame</td>
+					<td>A quizgame made in an WPF application</td>
+					<td><a href="https://github.com/alexanderbrasjo/Labb3">Quizgame</a></td>
+				</tr>
+				<tr>
+					<td>Pizza Website</td>
+					<td>A simple Website using HTML/CSS and Javascript</td>
+					<td><a href="https://github.com/alexanderbrasjo/Labb1webbutveckling">Website</a></td>
+				</tr>
 				</tbody>
 			</table>
 		</div>
+		
+		@*Authorized Skills View*@
+		<AuthorizeView Context="authContext">
+			<Authorized>
+				<div class="skills-section authorized">
+					<h4 class="display-4 text-color">Skills</h4>
+					<table class="table table-borderless text-color" style="font-size:large">
+						<thead>
+						<tr>
+							<td>Choose Skill</td>
+							<td>Name</td>
+							<td>Description</td>
+							<td>Years of experience</td>
+							<td>Skill level</td>
+						</tr>
+						</thead>
+						<tbody>
+						@foreach (var skill in listOfSkills)
+						{
+							<tr>
+								<td><input type="checkbox" checked="@((selectedSkillId == skill.Id))" @onclick="() => SelectSkill(skill.Id)"/></td>
+								<td>@skill.Name</td>
+								<td>@skill.Description</td>
+								<td>@skill.YearsOfExp</td>
+								<td>
+									<div class="progress-container">
+										<div class="progress-bar" style="width: @((skill.Level / 10.0) * 100)%;">
+											@skill.Level
+										</div>
+									</div>
+								</td>
+							</tr>
+						}
+						</tbody>
+					</table>
 
-		<div class="section">
-				<h4 class="display-4 text-color">Skills</h4>
-				<table class="table table-borderless text-color" style="font-size:medium">
-					<thead>
+
+					<EditForm Model="@skillToEdit" OnValidSubmit="HandleValidSubmit" class="edit-form">
+						<DataAnnotationsValidator/>
+						<ValidationSummary/>
+						<div class="text-color" style="font-size:large">
+							<label for="skillName">Name</label>
+							<InputText id="skillName" @bind-Value="skillToEdit.Name"/>
+							<label for="skillDescr">Description</label>
+							<InputText id="skillDescr" @bind-Value="skillToEdit.Description"/>
+							<label for="skillYOE">Years of Experience</label>
+							<InputNumber id="skillYOE" @bind-Value="skillToEdit.YearsOfExp"/>
+							<label for="skillLevel">Skill Level</label>
+							<InputNumber id="skillLevel" @bind-Value="skillToEdit.Level"/>
+							<button class="btn-color" type="submit">Add</button>
+							<button type="button" class="btn-color" @onclick="() => EditSkill()" disabled="@string.IsNullOrEmpty(selectedSkillId)">Edit</button>
+							<button type="button" class="btn-color" @onclick="() => RemoveSkill()" disabled="@string.IsNullOrEmpty(selectedSkillId)">Remove</button>
+						</div>
+					</EditForm>
+				</div>
+			</Authorized>
+			<NotAuthorized>
+				<div class="skills-section not-authorized">
+					<h4 class="display-4 text-color">Skills</h4>
+					<table class="table table-borderless text-color" style="font-size:large">
+						<thead>
 						<tr>
 							<td>Name</td>
 							<td>Description</td>
 							<td>Years of experience</td>
 							<td>Skill level</td>
 						</tr>
-					</thead>
-					<tbody>
-					@foreach(var skill in listOfSkills)
-					{
-						<tr>
-							<td>@skill.Name</td>
-							<td>@skill.Description</td>
-							<td>@skill.YearsOfExp</td>
-							<td>
-								<div class="progress-container">
-									<div class="progress-bar" style="width: @((skill.Level / 10.0) * 100)%;">
-										@skill.Level
+						</thead>
+						<tbody>
+						@foreach (var skill in listOfSkills)
+						{
+							<tr>
+								<td>@skill.Name</td>
+								<td>@skill.Description</td>
+								<td>@skill.YearsOfExp</td>
+								<td>
+									<div class="progress-container">
+										<div class="progress-bar" style="width: @((skill.Level / 10.0) * 100)%;">
+											@skill.Level
+										</div>
 									</div>
-								</div>
-							</td>
-						</tr>
-					}
-					</tbody>
-				</table>
-		</div>
+								</td>
+							</tr>
+						}
+						</tbody>
+					</table>
+				</div>
+			</NotAuthorized>
+		</AuthorizeView>
 	</div>
 
 </div>
+<footer>
+	<div class="d-flex justify-content-center mt-5">
+		<p class="lead text-color">Copyright: Alexander Brasjö 2024</p>
+	</div>
+</footer>
 
 @code {
 	private List<Skills> listOfSkills = new List<Skills>();
+	private Skills skillToEdit = new Skills();
+	private string? selectedSkillId = null;
 	private HttpClient httpClient = new HttpClient();
+	private JokeOfTheDay jokeOfTheDay = new JokeOfTheDay();
 
-	protected override Task OnInitializedAsync()
+	protected override async Task OnInitializedAsync()
 	{
-		FillSkillsList();
-
-		return base.OnInitializedAsync();
+		listOfSkills = await httpClient.GetFromJsonAsync<List<Skills>>("https://abwebb3api.azurewebsites.net/skills");
+		jokeOfTheDay = await httpClient.GetFromJsonAsync<JokeOfTheDay>("https://v2.jokeapi.dev/joke/Any");
+		
 	}
 
 	private async Task FillSkillsList()
 	{
 		try
 		{
-			var response = await httpClient.GetAsync("https://localhost:7166/skills");
+			var response = await httpClient.GetAsync("https://abwebb3api.azurewebsites.net/skills");
 
 			if (response.IsSuccessStatusCode)
 			{
@@ -210,6 +289,134 @@
 			Console.WriteLine(ex.Message);
 		}
 	}
+
+	private async Task GetJokeOfTheDay()
+	{
+		try
+		{
+			var response = await httpClient.GetAsync("https://v2.jokeapi.dev/joke/Any");
+
+			if (response.IsSuccessStatusCode)
+			{
+				jokeOfTheDay = await response.Content.ReadFromJsonAsync<JokeOfTheDay>();
+				StateHasChanged();
+			}
+			else
+			{
+
+				jokeOfTheDay = new JokeOfTheDay();
+			}
+		}
+		catch (Exception ex)
+		{
+
+			jokeOfTheDay = new JokeOfTheDay();
+			Console.WriteLine(ex.Message);
+		}
+	}
+
+	private void SelectSkill(string id)
+	{
+		if (selectedSkillId == id)
+		{
+			selectedSkillId = null;
+			skillToEdit = new Skills();
+		}
+		else
+		{
+			selectedSkillId = id;
+			var skill = listOfSkills.FirstOrDefault(s => s.Id == id);
+
+			if (skill != null)
+			{
+				skillToEdit = new Skills
+					{
+						Id = skill.Id,
+						Name = skill.Name,
+						Description = skill.Description,
+						YearsOfExp = skill.YearsOfExp,
+						Level = skill.Level
+					};
+			}
+		}
+	}
+
+	private async Task HandleValidSubmit()
+	{
+		try
+		{
+			var response = await httpClient.PostAsJsonAsync("https://abwebb3api.azurewebsites.net/skill", skillToEdit);
+
+			if (response.IsSuccessStatusCode)
+			{
+				await FillSkillsList();
+				skillToEdit = new Skills();
+			}
+			else
+			{
+				Console.WriteLine("Could not add skill");
+			}
+		}
+		catch (Exception ex)
+		{
+
+			Console.WriteLine(ex.Message);
+		}
+	}
+
+	private async Task EditSkill()
+	{
+		try
+		{
+			var response = await httpClient.PutAsJsonAsync($"https://abwebb3api.azurewebsites.net/skill/{selectedSkillId}", skillToEdit);
+
+			if (response.IsSuccessStatusCode)
+			{
+				await FillSkillsList();
+				skillToEdit = new Skills();
+			}
+			else
+			{
+				Console.WriteLine("Could not edit skill");
+			}
+		}
+		catch (Exception ex)
+		{
+
+			Console.WriteLine(ex.Message);
+		}
+	}
+
+	private async Task RemoveSkill()
+	{
+		try
+		{
+			if (!string.IsNullOrEmpty(selectedSkillId))
+			{
+				var response = await httpClient.DeleteAsync($"https://abwebb3api.azurewebsites.net/skill/{selectedSkillId}");
+
+				if (response.IsSuccessStatusCode)
+				{
+					await FillSkillsList();
+					selectedSkillId = null;
+					skillToEdit = new Skills();
+				}
+				else
+				{
+					Console.WriteLine("Could not delete skill");
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+
+			Console.WriteLine(ex.Message);
+		}
+	}
+
+	
+
+	
 }
 
 
