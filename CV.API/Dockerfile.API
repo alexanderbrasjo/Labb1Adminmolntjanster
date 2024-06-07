@@ -1,0 +1,20 @@
+
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /src
+
+COPY ["CV.API/CV.API.csproj", "CV.API/"]
+COPY ["CV.ClassLibrary/CV.ClassLibrary.csproj", "CV.ClassLibrary/"]
+RUN dotnet restore "CV.API/CV.API.csproj"
+
+COPY . .
+WORKDIR "/src/CV.API"
+RUN dotnet build "CV.API.csproj" -c Release -o /app/build
+
+RUN dotnet publish "CV.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+WORKDIR /app
+EXPOSE 80
+COPY --from=build /app/publish .
+
+ENTRYPOINT ["dotnet", "CV.API.dll"]

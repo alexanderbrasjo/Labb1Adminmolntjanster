@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var sqlConnectionString = Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING");
+var sqlConnectionString = Environment.GetEnvironmentVariable("SQL_CV");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(sqlConnectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

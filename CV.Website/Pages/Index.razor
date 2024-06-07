@@ -14,7 +14,7 @@
 	<div class="row">
 		@* image of me  *@
 		<div class="section align-items-center">
-			<img src="https://abwebb3images.blob.core.windows.net/images/Alexander1.jpg" alt="picture of me" class="circle-image mt-2" />
+			<img src="Images/Alexander1.jpg" alt="picture of me" class="circle-image mt-2" />
 			@*Joke of the day*@
 			<div class="mb-2 mt-2">
 				<h6 class="display-6 text-color d-flex justify-content-center">Joke of the day:</h6>
@@ -66,7 +66,7 @@
 						<td>
 							<span class="" title="github" aria-hidden="true">
 								<a href="https://github.com/alexanderbrasjo">
-									<img src="https://abwebb3images.blob.core.windows.net/images/githublogo3.png" alt="github logo" style="width: 25px; height:auto;" />
+									<img src="Images/githublogo3.png" alt="github logo" style="width: 25px; height:auto;" />
 								</a>
 							</span>
 						</td>
@@ -76,7 +76,7 @@
 						<td>
 							<span class="" title="linked-in" aria-hidden="true">
 								<a href="https://www.linkedin.com/in/alexander-brasj%C3%B6-318b99289/">
-									<img src="https://abwebb3images.blob.core.windows.net/images/linkedinlogo.png" alt="linked-in logo" style="width: 25px; height:auto;" />
+									<img src="Images/linkedinlogo.png" alt="linked-in logo" style="width: 25px; height:auto;" />
 								</a>
 							</span>
 						</td>
@@ -87,7 +87,7 @@
 						<td>
 							<span class="" title="OnlyFans" aria-hidden="true">
 									<a href="/of">
-										<img src="https://abwebb3images.blob.core.windows.net/images/OFlogo.png" alt="OnlyFans logo" style="width: 25px; height:auto;" />
+										<img src="Images/OFlogo.png" alt="OnlyFans logo" style="width: 25px; height:auto;" />
 								</a>
 							</span>
 						</td>
@@ -154,9 +154,8 @@
 			</table>
 		</div>
 		
-		@*Authorized Skills View*@
-		<AuthorizeView Context="authContext">
-			<Authorized>
+		@*Skills View*@
+		
 				<div class="skills-section authorized">
 					<h4 class="display-4 text-color">Skills</h4>
 					<table class="table table-borderless text-color" style="font-size:large">
@@ -208,8 +207,8 @@
 						</div>
 					</EditForm>
 				</div>
-			</Authorized>
-			<NotAuthorized>
+			
+			@* <NotAuthorized>
 				<div class="skills-section not-authorized">
 					<h4 class="display-4 text-color">Skills</h4>
 					<table class="table table-borderless text-color" style="font-size:large">
@@ -240,8 +239,8 @@
 						</tbody>
 					</table>
 				</div>
-			</NotAuthorized>
-		</AuthorizeView>
+			</NotAuthorized> *@
+		
 	</div>
 
 </div>
@@ -260,7 +259,8 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		listOfSkills = await httpClient.GetFromJsonAsync<List<Skills>>("https://abwebb3api.azurewebsites.net/skills");
+		await FillSkillsList();
+		//listOfSkills = await httpClient.GetFromJsonAsync<List<Skills>>("https://localhost:27017/skills");
 		jokeOfTheDay = await httpClient.GetFromJsonAsync<JokeOfTheDay>("https://v2.jokeapi.dev/joke/Any");
 		
 	}
@@ -269,7 +269,7 @@
 	{
 		try
 		{
-			var response = await httpClient.GetAsync("https://abwebb3api.azurewebsites.net/skills");
+			var response = await httpClient.GetAsync("http://api/skills");
 
 			if (response.IsSuccessStatusCode)
 			{
@@ -345,7 +345,7 @@
 	{
 		try
 		{
-			var response = await httpClient.PostAsJsonAsync("https://abwebb3api.azurewebsites.net/skill", skillToEdit);
+			var response = await httpClient.PostAsJsonAsync("http://api/skill", skillToEdit);
 
 			if (response.IsSuccessStatusCode)
 			{
@@ -368,7 +368,7 @@
 	{
 		try
 		{
-			var response = await httpClient.PutAsJsonAsync($"https://abwebb3api.azurewebsites.net/skill/{selectedSkillId}", skillToEdit);
+			var response = await httpClient.PutAsJsonAsync($"http://api/skills/{selectedSkillId}", skillToEdit);
 
 			if (response.IsSuccessStatusCode)
 			{
@@ -393,7 +393,7 @@
 		{
 			if (!string.IsNullOrEmpty(selectedSkillId))
 			{
-				var response = await httpClient.DeleteAsync($"https://abwebb3api.azurewebsites.net/skill/{selectedSkillId}");
+				var response = await httpClient.DeleteAsync($"http://api/skill/{selectedSkillId}");
 
 				if (response.IsSuccessStatusCode)
 				{

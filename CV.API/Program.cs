@@ -20,11 +20,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/skills", async () =>
+app.MapGet("/skills", async (ILogger<Program> logger) =>
 {
     try
     {
         var listOfSkills = await db.GetAllAsync("Skills");
+        foreach (var skill in listOfSkills)
+        {
+            logger.LogInformation("Skill: {}", skill.Name);
+        }
+        
         return Results.Ok(listOfSkills);
     }
     catch (Exception)

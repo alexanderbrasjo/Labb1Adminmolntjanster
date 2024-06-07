@@ -15,9 +15,8 @@ namespace CV.ClassLibrary.Data
 
 
         public MongoDBService(string database)
-        {
-	        
-			var connectionString = Environment.GetEnvironmentVariable("MONGO_CONNECTION_STRING");
+        {  
+			var connectionString = Environment.GetEnvironmentVariable("MONGO_CV");
             var client = new MongoClient(connectionString);
             db = client.GetDatabase(database);
         }
@@ -64,8 +63,6 @@ namespace CV.ClassLibrary.Data
             {
                 return "Item not found!";
             }
-        }
-
-       
+        } 
     }
 }
